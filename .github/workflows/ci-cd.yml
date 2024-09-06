@@ -46,12 +46,12 @@ jobs:
 
     - name: Build & Push Post Service
       run: |
-        docker build -t aadilnv/miniblog-product:latest backend/postService
+        docker build -t aadilnv/miniblog-post:latest backend/postService
         docker push aadilnv/miniblog-post:latest
 
     - name: Build & Push Comment Service
       run: |
-        docker build -t aadilnv/miniblog-order:latest backend/commentService
+        docker build -t aadilnv/miniblog-comment:latest backend/commentService
         docker push aadilnv/miniblog-comment:latest
 
     - name: Build & Push API Gateway
