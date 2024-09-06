@@ -7,7 +7,7 @@ const colors = require('colors')
 const userRoutes = require('./Routes/userRouter')
 const connectDB = require('./config/db')
 
-// jhgjghgjssssassahghjgjgjhgdsfsdfsdfsdfsdfsdfdsdhdhdh
+// jhgjghdfsdfsdfsdfgjssssassahghjgjgjhgdsfsdfsdfsdfsdfsdfdsdhdhdh
 app.use(express.json())
 connectDB()
 
