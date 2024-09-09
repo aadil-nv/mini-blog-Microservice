@@ -42,7 +42,7 @@ const registerUser = asynchandler(async (req, res) => {
 });
 
 const loginUser = asynchandler(async (req, res) => {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
     const token = req.headers.authorization && req.headers.authorization.split(" ")[1];
   
@@ -51,9 +51,15 @@ const loginUser = asynchandler(async (req, res) => {
       try {
     
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("decoded is ====",decoded);
         
+       
+        const findUser = await Users.findById(decoded.id);
+        if(!findUser){
+          return res.status(404).json({ message: "User not found" });
+        }
 
-        const user = await Users.findOne({ name });
+        const user = await Users.findOne({email:email });
         if (!user) {
           return res.status(404).json({ message: "User not found" });
         }

@@ -26,18 +26,18 @@ const addComment = asyncHandler(async (req, res) => {
 
   const savedComment = await comment.save();
 
-  // Connect to RabbitMQ
+  
   const connection = await amqp.connect('amqp://localhost'); // Adjust the URL as necessary
   const channel = await connection.createChannel();
   const queue = 'postServiceQueue'; // Queue name
 
-  // Send comment data to RabbitMQ queue
+ 
   channel.sendToQueue(queue, Buffer.from(JSON.stringify({
     comment: savedComment,
     postId: postId
   })));
 
-  // Close the connection
+ 
   setTimeout(() => {
     connection.close();
   }, 500);

@@ -25,7 +25,9 @@ const postBlog = asynchandler(async (req,res) => {
 
     res.status(201).json({
       message: "Post created successfully",
+      postId:newPost._id,
       post: newPost,
+      userId:userId
     });
   } catch (error) {
     res.status(500).json({
@@ -45,9 +47,7 @@ const postBlog = asynchandler(async (req,res) => {
 
     res.status(302).json({
         message:"Post found successfully",
-        postId :postData._id,
-        title:postData.title,
-        content:postData.content
+        postContent:postData
     })
     
  })
@@ -83,10 +83,20 @@ const addComment = asynchandler(async (commentData) => {
     };
 });
 
+const getAllPost= asynchandler (async (req,res)=>{
+  console.log("hitting data ");
+  
+  const postData = await Posts.find()
+  if(postData){
+    res.status(200).json({message:"All posts available",postData})
+  }
+})
+
 
 
 module.exports = {
   postBlog,
   getPost,
-  addComment
+  addComment,
+  getAllPost
 };
